@@ -15,6 +15,8 @@ const TYPE_LABEL: Record<TransactionType, string> = {
   withdraw: "Retiro en efectivo",
   remittance: "Remesa",
   convert: "Conversión",
+  card_deposit: "Depósito con tarjeta",
+  card_withdraw: "Retiro a tarjeta",
 };
 
 export interface TransactionReceiptProps {
@@ -29,21 +31,40 @@ export function TransactionReceipt({ tx, userId }: TransactionReceiptProps) {
     (isSender ? tx.recipient?.name : tx.sender?.name) ??
     "—";
   const sign = isSender ? "−" : "+";
+  const isCardTx = tx.type === "card_deposit" || tx.type === "card_withdraw";
   const isStoreTx =
+    !isCardTx &&
     (tx.type === "merchant" ||
       tx.type === "deposit" ||
-      tx.type === "withdraw") &&
+      tx.type === "withdraw" ||
+      tx.type === "bill" ||
+      tx.type === "topup") &&
     !!tx.merchant_name;
+  const counterpartyLabel = isCardTx
+    ? "Tarjeta"
+    : isStoreTx
+      ? "Comercio"
+      : isSender
+        ? "Para"
+        : "De";
   const headerLabel =
-    tx.type === "deposit" && tx.merchant_name
-      ? `Depositaste en ${tx.merchant_name}`
-      : tx.type === "withdraw" && tx.merchant_name
-        ? `Retiraste de ${tx.merchant_name}`
-        : tx.type === "merchant" && tx.merchant_name
-          ? `Pagaste a ${tx.merchant_name}`
-          : isSender
-            ? "Mandaste"
-            : "Recibiste";
+    tx.type === "card_deposit"
+      ? "Depósito con tarjeta"
+      : tx.type === "card_withdraw"
+        ? "Retiro a tarjeta"
+        : tx.type === "deposit" && tx.merchant_name
+          ? `Depositaste en ${tx.merchant_name}`
+          : tx.type === "withdraw" && tx.merchant_name
+            ? `Retiraste de ${tx.merchant_name}`
+            : tx.type === "merchant" && tx.merchant_name
+              ? `Pagaste a ${tx.merchant_name}`
+              : tx.type === "bill" && tx.merchant_name
+                ? `Pagaste tu factura de ${tx.merchant_name}`
+                : tx.type === "topup" && tx.merchant_name
+                  ? `Recargaste con ${tx.merchant_name}`
+                  : isSender
+                    ? "Mandaste"
+                    : "Recibiste";
 
   return (
     <div className="space-y-3 rounded-[var(--radius-card)] bg-surface p-5 ring-1 ring-border">
@@ -69,9 +90,7 @@ export function TransactionReceipt({ tx, userId }: TransactionReceiptProps) {
                 : "Cancelado"}
         </span>
       </ReceiptRow>
-      <ReceiptRow label={isStoreTx ? "Comercio" : isSender ? "Para" : "De"}>
-        {counterparty}
-      </ReceiptRow>
+      <ReceiptRow label={counterpartyLabel}>{counterparty}</ReceiptRow>
       <ReceiptRow label="Tipo">{TYPE_LABEL[tx.type]}</ReceiptRow>
       {tx.message && <ReceiptRow label="Mensaje">{tx.message}</ReceiptRow>}
       <ReceiptRow label="Fecha">

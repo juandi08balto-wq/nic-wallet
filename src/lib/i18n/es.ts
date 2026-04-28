@@ -3,7 +3,7 @@ export const es = {
   "brand.tagline": "Mandá. Recibí. Pagá.",
 
   "nav.inicio": "Inicio",
-  "nav.pagos": "Pagos",
+  "nav.servicios": "Servicios",
   "nav.tarjeta": "Tarjeta",
   "nav.actividad": "Actividad",
   "nav.perfil": "Perfil",

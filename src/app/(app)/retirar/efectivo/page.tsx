@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { BillPayFlow } from "./BillPayFlow";
+import { WithdrawFlow } from "./WithdrawFlow";
 import type { Balance } from "@/types/db";
 
 export const dynamic = "force-dynamic";
 
-export default async function FacturasPage() {
+export default async function RetirarEfectivoPage() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -18,5 +18,5 @@ export default async function FacturasPage() {
     .eq("user_id", user.id);
   const balances = (balancesRow ?? []) as Balance[];
 
-  return <BillPayFlow userId={user.id} balances={balances} />;
+  return <WithdrawFlow userId={user.id} balances={balances} />;
 }

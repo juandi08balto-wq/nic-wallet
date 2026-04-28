@@ -7,6 +7,7 @@ import {
   Banknote,
   Globe,
   Repeat,
+  CreditCard,
   type LucideIcon,
 } from "lucide-react";
 import { formatMoney } from "@/lib/currency";
@@ -27,6 +28,8 @@ const ICONS: Record<TransactionType, LucideIcon> = {
   withdraw: Banknote,
   remittance: Globe,
   convert: Repeat,
+  card_deposit: CreditCard,
+  card_withdraw: CreditCard,
 };
 
 const TYPE_COLORS: Record<TransactionType, string> = {
@@ -39,6 +42,8 @@ const TYPE_COLORS: Record<TransactionType, string> = {
   withdraw: "bg-coral/15 text-coral-dark",
   remittance: "bg-gold/20 text-gold-dark dark:text-gold",
   convert: "bg-gold/20 text-gold-dark dark:text-gold",
+  card_deposit: "bg-success/15 text-success",
+  card_withdraw: "bg-coral/15 text-coral-dark",
 };
 
 export interface TxRowProps {

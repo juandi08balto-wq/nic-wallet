@@ -16,10 +16,7 @@ import {
   formatMoney,
 } from "@/lib/currency";
 import { playError } from "@/lib/sound";
-import type {
-  Currency,
-  TransactionWithParties,
-} from "@/types/db";
+import type { Currency, TransactionWithParties } from "@/types/db";
 import type { PartnerStore } from "@/lib/demo/stores";
 
 export interface DepositFlowProps {
@@ -89,7 +86,7 @@ export function DepositFlow({ userId }: DepositFlowProps) {
           issues?: Array<{ path: string; message: string }>;
         };
         if (err.issues?.length) {
-          console.error("[/depositar] validation issues:", err.issues);
+          console.error("[/depositar/efectivo] validation issues:", err.issues);
         }
         throw new Error(err.error ?? "deposit_failed");
       }
@@ -122,7 +119,7 @@ export function DepositFlow({ userId }: DepositFlowProps) {
       <header className="flex items-center gap-2 px-3 py-3">
         {stage === "select-store" ? (
           <Link
-            href="/pagos"
+            href="/servicios"
             aria-label="Volver"
             className="rounded-full p-2 text-foreground hover:bg-surface-muted"
           >

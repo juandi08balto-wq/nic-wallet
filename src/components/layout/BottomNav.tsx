@@ -22,7 +22,7 @@ interface Tab {
 
 const tabs: Tab[] = [
   { href: "/inicio", icon: Home, labelKey: "nav.inicio" },
-  { href: "/pagos", icon: Wallet, labelKey: "nav.pagos" },
+  { href: "/servicios", icon: Wallet, labelKey: "nav.servicios" },
   { href: "/tarjeta", icon: CreditCard, labelKey: "nav.tarjeta" },
   { href: "/actividad", icon: Receipt, labelKey: "nav.actividad" },
   { href: "/perfil", icon: User, labelKey: "nav.perfil" },

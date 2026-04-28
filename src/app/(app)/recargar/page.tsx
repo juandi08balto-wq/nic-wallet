@@ -1,14 +1,22 @@
-import { Header } from "@/components/layout/Header";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { TopupFlow } from "./TopupFlow";
+import type { Balance } from "@/types/db";
 
-export default function RecargarPage() {
-  return (
-    <>
-      <Header title="Recargar" />
-      <div className="px-4 py-5">
-        <p className="text-sm text-muted-foreground">
-          Phase 8 — recargar celular Claro o Tigo.
-        </p>
-      </div>
-    </>
-  );
+export const dynamic = "force-dynamic";
+
+export default async function RecargarPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/ingresar");
+
+  const { data: balancesRow } = await supabase
+    .from("balances")
+    .select("*")
+    .eq("user_id", user.id);
+  const balances = (balancesRow ?? []) as Balance[];
+
+  return <TopupFlow userId={user.id} balances={balances} />;
 }

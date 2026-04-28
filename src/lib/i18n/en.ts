@@ -7,7 +7,7 @@ export const en: Partial<Record<DictKey, string>> = {
   "brand.tagline": "Send. Receive. Pay.",
 
   "nav.inicio": "Home",
-  "nav.pagos": "Pay",
+  "nav.servicios": "Services",
   "nav.tarjeta": "Card",
   "nav.actividad": "Activity",
   "nav.perfil": "Profile",

@@ -11,7 +11,9 @@ export type TransactionType =
   | "deposit"
   | "withdraw"
   | "remittance"
-  | "convert";
+  | "convert"
+  | "card_deposit"
+  | "card_withdraw";
 export type TransactionStatus = "pending" | "completed" | "failed" | "canceled";
 
 export type AccountType = "personal" | "negocio";

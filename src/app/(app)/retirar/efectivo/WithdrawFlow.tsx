@@ -90,7 +90,7 @@ export function WithdrawFlow({ userId, balances }: WithdrawFlowProps) {
           issues?: Array<{ path: string; message: string }>;
         };
         if (err.issues?.length) {
-          console.error("[/retirar] validation issues:", err.issues);
+          console.error("[/retirar/efectivo] validation issues:", err.issues);
         }
         if (err.error === "insufficient_funds") {
           playError();
@@ -131,7 +131,7 @@ export function WithdrawFlow({ userId, balances }: WithdrawFlowProps) {
       <header className="flex items-center gap-2 px-3 py-3">
         {stage === "select-store" ? (
           <Link
-            href="/pagos"
+            href="/servicios"
             aria-label="Volver"
             className="rounded-full p-2 text-foreground hover:bg-surface-muted"
           >
