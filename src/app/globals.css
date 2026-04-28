@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-50: #EEF1F8;
+  --color-primary-100: #D9E0EF;
+  --color-primary-200: #B0BFDD;
+  --color-primary-300: #889ECC;
+  --color-primary-400: #5F7DBA;
+  --color-primary-500: #3E5FA3;
+  --color-primary-600: #294889;
+  --color-primary-700: #0F2A6B;
+  --color-primary-800: #0B1F50;
+  --color-primary-900: #061436;
+  --color-primary: #0F2A6B;
+
+  --color-gold-light: #E5C19A;
+  --color-gold: #D4A574;
+  --color-gold-dark: #A87E4D;
+
+  --color-coral: #FF8B6B;
+  --color-coral-dark: #E5644A;
+
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --radius-card: 1.25rem;
+  --radius-button: 1rem;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F7F8FB;
+  --foreground: #0B1330;
+  --surface: #FFFFFF;
+  --surface-muted: #EEF0F7;
+  --border: #E2E5EE;
+  --muted-foreground: #5C6585;
+}
+
+.dark {
+  --background: #060B20;
+  --foreground: #F5F7FB;
+  --surface: #0E1738;
+  --surface-muted: #131E47;
+  --border: #1F2A55;
+  --muted-foreground: #97A0BF;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-muted-foreground: var(--muted-foreground);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@supports (height: 100dvh) {
+  html,
+  body {
+    min-height: 100dvh;
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+.shimmer {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0,
+    rgba(255, 255, 255, 0.06) 40%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.06) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
 }

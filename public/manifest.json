@@ -1,0 +1,22 @@
+{
+  "name": "Nic Wallet",
+  "short_name": "Nic Wallet",
+  "description": "Mandá. Recibí. Pagá. La billetera de Nicaragua.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F2A6B",
+  "theme_color": "#0F2A6B",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["finance"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
