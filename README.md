@@ -1,3 +1,11 @@
+# Nic Wallet
+
+Nicaraguan-Spanish fintech demo PWA — _"Mandá. Recibí. Pagá."_
+
+Built on [Next.js 16](https://nextjs.org) (App Router + Turbopack) with Supabase for auth and data.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
