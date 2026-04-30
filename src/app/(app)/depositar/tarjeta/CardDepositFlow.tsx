@@ -8,7 +8,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/Button";
 import { AddCardSheet } from "@/components/wallet/AddCardSheet";
 import { TransactionSuccess } from "@/components/wallet/TransactionSuccess";
-import { cn } from "@/lib/utils";
 import { formatMoney } from "@/lib/currency";
 import { playError } from "@/lib/sound";
 import { createClient } from "@/lib/supabase/client";
@@ -114,7 +113,7 @@ export function CardDepositFlow({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="flex items-center gap-2 px-3 py-3">
+      <header className="pt-safe flex items-center gap-2 px-3 pb-3">
         {stage === "select-card" ? (
           <Link
             href="/servicios"
@@ -220,7 +219,7 @@ export function CardDepositFlow({
           >
             <CardHeaderRow card={card} />
 
-            <div className="flex flex-1 flex-col items-center justify-center pb-4">
+            <div className="flex flex-1 flex-col items-center justify-end pb-8">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
                 Dólares · mínimo {formatMoney(MIN_USD, "USD")}
               </p>

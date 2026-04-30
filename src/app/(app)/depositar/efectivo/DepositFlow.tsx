@@ -116,7 +116,7 @@ export function DepositFlow({ userId }: DepositFlowProps) {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="flex items-center gap-2 px-3 py-3">
+      <header className="pt-safe flex items-center gap-2 px-3 pb-3">
         {stage === "select-store" ? (
           <Link
             href="/servicios"
@@ -184,7 +184,7 @@ export function DepositFlow({ userId }: DepositFlowProps) {
               </div>
             </div>
 
-            <div className="flex flex-1 flex-col items-center justify-center pb-4">
+            <div className="flex flex-1 flex-col items-center justify-end pb-8">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
                 {currencyLabel(currency)} · mínimo{" "}
                 {formatMoney(minAmount, currency)}

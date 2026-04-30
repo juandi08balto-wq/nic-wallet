@@ -76,7 +76,7 @@ export function MerchantPayConfirm({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="flex items-center gap-3 px-3 py-3">
+      <header className="pt-safe flex items-center gap-3 px-3 pb-3">
         <button
           type="button"
           onClick={onBack}

@@ -15,7 +15,7 @@ export function Header({ title, greeting, rightSlot, className }: HeaderProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-20 flex items-center justify-between border-b border-border bg-background/85 px-5 py-3 backdrop-blur-md",
+        "pt-safe sticky top-0 z-20 flex items-center justify-between border-b border-border bg-background/85 px-5 pb-3 backdrop-blur-md",
         className,
       )}
     >

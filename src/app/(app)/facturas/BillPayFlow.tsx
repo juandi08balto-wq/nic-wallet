@@ -114,7 +114,7 @@ export function BillPayFlow({ userId, balances }: BillPayFlowProps) {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="flex items-center gap-2 px-3 py-3">
+      <header className="pt-safe flex items-center gap-2 px-3 pb-3">
         {stage === "select-provider" ? (
           <Link
             href="/servicios"
@@ -227,7 +227,7 @@ export function BillPayFlow({ userId, balances }: BillPayFlowProps) {
               />
             </div>
 
-            <div className="flex flex-col items-center pt-2">
+            <div className="mt-auto flex flex-col items-center pt-4">
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
                 {currencyLabel(currency)} · disponible{" "}
                 {formatMoney(balance, currency)}

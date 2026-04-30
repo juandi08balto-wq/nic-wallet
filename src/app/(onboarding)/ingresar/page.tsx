@@ -45,7 +45,7 @@ export default function IngresarPage() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-background">
-      <header className="px-3 pt-5">
+      <header className="pt-safe-lg px-3">
         <Link
           href="/splash"
           aria-label="Volver"

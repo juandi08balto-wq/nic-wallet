@@ -28,7 +28,7 @@ export function StepHeader({
   };
 
   return (
-    <div className="px-5 pt-5 pb-3">
+    <div className="pt-safe-lg px-5 pb-3">
       <div className="mb-5 flex items-center justify-between">
         <button
           type="button"

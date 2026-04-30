@@ -62,7 +62,7 @@ export function ReceiveContent({ profile }: ReceiveContentProps) {
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="flex items-center gap-2 px-3 py-3">
+      <header className="pt-safe flex items-center gap-2 px-3 pb-3">
         <Link
           href="/inicio"
           aria-label="Volver"

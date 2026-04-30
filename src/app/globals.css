@@ -85,6 +85,16 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* iOS-safe top padding for sticky/page headers. Falls back to a sensible
+   minimum on devices without a notch. Two sizes: pt-safe (~py-3 minimum)
+   and pt-safe-lg (~pt-5 minimum). */
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top), 0.75rem);
+}
+.pt-safe-lg {
+  padding-top: max(env(safe-area-inset-top), 1.25rem);
+}
+
 @keyframes shimmer {
   from { background-position: -200% 0; }
   to { background-position: 200% 0; }
