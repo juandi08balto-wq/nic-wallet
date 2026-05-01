@@ -32,8 +32,10 @@ export function TransactionReceipt({ tx, userId }: TransactionReceiptProps) {
     "—";
   const sign = isSender ? "−" : "+";
   const isCardTx = tx.type === "card_deposit" || tx.type === "card_withdraw";
+  const isRemittance = tx.type === "remittance";
   const isStoreTx =
     !isCardTx &&
+    !isRemittance &&
     (tx.type === "merchant" ||
       tx.type === "deposit" ||
       tx.type === "withdraw" ||
@@ -42,29 +44,33 @@ export function TransactionReceipt({ tx, userId }: TransactionReceiptProps) {
     !!tx.merchant_name;
   const counterpartyLabel = isCardTx
     ? "Tarjeta"
-    : isStoreTx
-      ? "Comercio"
-      : isSender
-        ? "Para"
-        : "De";
+    : isRemittance
+      ? "Remitente"
+      : isStoreTx
+        ? "Comercio"
+        : isSender
+          ? "Para"
+          : "De";
   const headerLabel =
     tx.type === "card_deposit"
       ? "Depósito con tarjeta"
       : tx.type === "card_withdraw"
         ? "Retiro a tarjeta"
-        : tx.type === "deposit" && tx.merchant_name
-          ? `Depositaste en ${tx.merchant_name}`
-          : tx.type === "withdraw" && tx.merchant_name
-            ? `Retiraste de ${tx.merchant_name}`
-            : tx.type === "merchant" && tx.merchant_name
-              ? `Pagaste a ${tx.merchant_name}`
-              : tx.type === "bill" && tx.merchant_name
-                ? `Pagaste tu factura de ${tx.merchant_name}`
-                : tx.type === "topup" && tx.merchant_name
-                  ? `Recargaste con ${tx.merchant_name}`
-                  : isSender
-                    ? "Mandaste"
-                    : "Recibiste";
+        : tx.type === "remittance" && tx.merchant_name
+          ? `Recibiste una remesa de ${tx.merchant_name} 🇺🇸`
+          : tx.type === "deposit" && tx.merchant_name
+            ? `Depositaste en ${tx.merchant_name}`
+            : tx.type === "withdraw" && tx.merchant_name
+              ? `Retiraste de ${tx.merchant_name}`
+              : tx.type === "merchant" && tx.merchant_name
+                ? `Pagaste a ${tx.merchant_name}`
+                : tx.type === "bill" && tx.merchant_name
+                  ? `Pagaste tu factura de ${tx.merchant_name}`
+                  : tx.type === "topup" && tx.merchant_name
+                    ? `Recargaste con ${tx.merchant_name}`
+                    : isSender
+                      ? "Mandaste"
+                      : "Recibiste";
 
   return (
     <div className="space-y-3 rounded-[var(--radius-card)] bg-surface p-5 ring-1 ring-border">

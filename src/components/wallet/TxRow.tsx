@@ -55,9 +55,11 @@ export function TxRow({ tx, userId }: TxRowProps) {
   const isSender = tx.sender_id === userId;
   const Icon = ICONS[tx.type];
   const counterparty =
-    tx.merchant_name ??
-    (isSender ? tx.recipient?.name : tx.sender?.name) ??
-    "—";
+    tx.type === "remittance" && tx.merchant_name
+      ? `Remesa · ${tx.merchant_name}`
+      : (tx.merchant_name ??
+        (isSender ? tx.recipient?.name : tx.sender?.name) ??
+        "—");
   const sign = isSender ? "−" : "+";
   const amountColor = isSender ? "text-foreground" : "text-success";
 
