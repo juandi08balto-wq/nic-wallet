@@ -46,21 +46,36 @@ export function StepPin() {
         if (!res.ok) {
           const err = (await res.json().catch(() => ({}))) as {
             error?: string;
+            userMessage?: string;
             message?: string;
+            debug?: unknown;
+            issues?: Array<{ path: string; message: string }>;
           };
+          console.error("[/registrarse] signup error:", err);
+          playError();
+
+          // Account already exists → route to sign-in instead of retry.
           if (err.error === "already_exists" || err.error === "phone_in_use") {
-            toast.error("Ya hay una cuenta con ese número. Iniciá sesión.");
+            toast.error(
+              err.userMessage ??
+                "Ya existe una cuenta con ese número. Iniciá sesión.",
+            );
             reset();
             router.push("/ingresar");
             return;
           }
-          if (err.error === "service_role_missing") {
-            toast.error(
-              "Falta SUPABASE_SERVICE_ROLE_KEY en .env.local. Agregalo y reiniciá el dev server.",
-            );
-            throw new Error(err.error);
-          }
-          throw new Error(err.message ?? err.error ?? "signup failed");
+
+          // Everything else: surface the Spanish userMessage from the API
+          // (or fall back) and let the user re-enter their PIN.
+          const message =
+            err.userMessage ??
+            err.message ??
+            "No pudimos crear tu cuenta. Probá de nuevo.";
+          toast.error(message);
+          setPhase("enter");
+          setPin("");
+          setConfirmPin("");
+          return;
         }
 
         const supabase = createClient();
@@ -75,9 +90,13 @@ export function StepPin() {
         router.refresh();
         router.push("/inicio");
       } catch (e) {
-        console.error(e);
+        console.error("[/registrarse] signup threw:", e);
         playError();
-        toast.error("No pudimos crear tu cuenta. Probá de nuevo.");
+        toast.error(
+          e instanceof Error && e.message
+            ? `No pudimos crear tu cuenta: ${e.message}`
+            : "No pudimos crear tu cuenta. Probá de nuevo.",
+        );
         setPhase("enter");
         setPin("");
         setConfirmPin("");
